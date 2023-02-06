@@ -30,7 +30,14 @@
                             <outlet property="delegate" destination="NG2-nR-POG" id="QKV-Hg-aKU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="bg2-Go-XK3"/>
+                    <navigationItem key="navigationItem" title="Todoey" id="bg2-Go-XK3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="935-Ee-jey">
+                            <color key="tintColor" systemColor="systemBlueColor"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="NG2-nR-POG" id="vmc-Ld-il2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVy-48-63M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" systemColor="systemBlueColor"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" systemColor="systemBlueColor"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
