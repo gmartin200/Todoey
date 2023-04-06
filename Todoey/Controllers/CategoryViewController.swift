@@ -11,13 +11,19 @@ import CoreData
 class CategoryViewController: UITableViewController {
     var categories = [Category]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    var deleteState = false
+    @IBOutlet weak var delAddButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(dataFilePath)
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+//        print("\(deleteState)")
+        deleteState = false
+        delAddButton.title = "Add Categories"
+        addButton.isHidden = false
         loadCategories()
-
     }
     
     //MARK: - TableView Datasource Methods
@@ -33,7 +39,14 @@ class CategoryViewController: UITableViewController {
     
     //MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToItems", sender: self)
+        if deleteState == false {
+            performSegue(withIdentifier: "goToItems", sender: self)
+        } else {
+            context.delete(categories[indexPath.row])
+            categories.remove(at: indexPath.row)
+            saveCategories()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,38 +74,47 @@ class CategoryViewController: UITableViewController {
         }
         tableView.reloadData()
     }
-
-
     
     //MARK: - Add New Categories
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         // this is called when the "+" button is pressed
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add", style: .default) { action in
-            //This is what happens once the user clicks the Add Category button on our UIAlert
-            let newCategory = Category(context: self.context)
-            newCategory.name = textField.text!
-            self.categories.append(newCategory)
-            self.saveCategories()
+        if deleteState == false {
+            var textField = UITextField()
+            let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Add", style: .default) { action in
+                //This is what happens once the user clicks the Add Category button on our UIAlert
+                let newCategory = Category(context: self.context)
+                newCategory.name = textField.text!
+                self.categories.append(newCategory)
+//                do {
+//                    try self.categories.sort(by: <#T##(Category, Category) throws -> Bool#>)
+//                } catch {
+//                    print("Error sorting: \(error)")
+//                }
+//                categories.sort(using: Category)
+                self.saveCategories()
+            }
+            
+            alert.addTextField { field in
+                textField.placeholder = "Add a new category"
+                textField = field
+            }
+            
+            alert.addAction(action)
+            
+            present(alert, animated: true, completion: nil)
         }
-        
-        alert.addTextField { field in
-            textField.placeholder = "Add a new category"
-            textField = field
-        }
-
-        alert.addAction(action)
-        
-        present(alert, animated: true, completion: nil)
-
     }
+    //MARK: - Toggle between Adding and Deleting Categories
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        context.delete(categories[indexPath.row])
-//        categories.remove(at: indexPath.row)
-//        saveCategories()
-//        tableView.deselectRow(at: indexPath, animated: true)
-//     }
-    
+    @IBAction func deleteAddToggleButtonPressed(_ sender: UIBarButtonItem) {
+        deleteState = !deleteState
+        if deleteState {
+            delAddButton.title = "Del Categories"
+            addButton.isHidden = true
+        } else {
+            delAddButton.title = "Add Categories"
+            addButton.isHidden = false
+        }
+    }
 }

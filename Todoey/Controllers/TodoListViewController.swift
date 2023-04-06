@@ -16,10 +16,11 @@ class TodoListViewController: UITableViewController {
             loadItems()
         }
     }
-//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appending(path: "Items.plist")
-//   let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    var deleteAddState = false
+    //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appending(path: "Items.plist")
+    //   let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +45,15 @@ class TodoListViewController: UITableViewController {
     
     //MARK: - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //    print(itemArray[indexPath.row])
+        //    print(itemArray[indexPath.row])
         // called when a row is selected
         // use the next 2 rows to delete the selected item
-//        context.delete(itemArray[indexPath.row])
-//        itemArray.remove(at: indexPath.row)
-          itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        //        context.delete(itemArray[indexPath.row])
+        //        itemArray.remove(at: indexPath.row)
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
-     }
+    }
     
     //MARK: - Add New Items
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -73,7 +74,7 @@ class TodoListViewController: UITableViewController {
             alertTextField.placeholder = "Create new item"
             textField = alertTextField
         }
-
+        
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
@@ -89,15 +90,15 @@ class TodoListViewController: UITableViewController {
     }
     
     func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest(), predicate : NSPredicate? = nil) {
-//    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()) {
+        //    func loadItems(with request : NSFetchRequest<Item> = Item.fetchRequest()) {
         let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
         if let additionalPredicate = predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
         } else {
             request.predicate = categoryPredicate
         }
-//        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
-//        request.predicate = compoundPredicate
+        //        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, predicate])
+        //        request.predicate = compoundPredicate
         do {
             itemArray = try context.fetch(request)
         } catch {

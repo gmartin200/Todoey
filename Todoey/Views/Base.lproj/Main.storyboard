@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E6j-aP-xcc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E6j-aP-xcc">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,6 +33,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Todoey" id="MZT-ar-hGs">
+                        <barButtonItem key="leftBarButtonItem" tag="1" title="Del/Add" id="K6Y-pZ-xjn">
+                            <connections>
+                                <action selector="deleteAddToggleButtonPressed:" destination="lNL-db-kCa" id="oH7-SP-2LR"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="jRP-Lz-yMs">
                             <connections>
                                 <action selector="addButtonPressed:" destination="lNL-db-kCa" id="wWw-Ov-xvs"/>
@@ -40,6 +46,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="addButton" destination="jRP-Lz-yMs" id="wFp-q6-r3b"/>
+                        <outlet property="delAddButton" destination="K6Y-pZ-xjn" id="YIo-RJ-ldT"/>
                         <segue destination="NG2-nR-POG" kind="show" identifier="goToItems" id="uGJ-gm-1P2"/>
                     </connections>
                 </tableViewController>
