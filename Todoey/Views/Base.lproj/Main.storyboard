@@ -33,16 +33,18 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Todoey" id="MZT-ar-hGs">
-                        <barButtonItem key="leftBarButtonItem" tag="1" title="Del/Add" id="K6Y-pZ-xjn">
-                            <connections>
-                                <action selector="deleteAddToggleButtonPressed:" destination="lNL-db-kCa" id="oH7-SP-2LR"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jRP-Lz-yMs">
-                            <connections>
-                                <action selector="addButtonPressed:" destination="lNL-db-kCa" id="wWw-Ov-xvs"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="jRP-Lz-yMs">
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="lNL-db-kCa" id="wWw-Ov-xvs"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="1" title="Del/Add" id="K6Y-pZ-xjn">
+                                <connections>
+                                    <action selector="deleteAddToggleButtonPressed:" destination="lNL-db-kCa" id="oH7-SP-2LR"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -87,13 +89,24 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="bg2-Go-XK3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="935-Ee-jey">
-                            <color key="tintColor" systemColor="systemBlueColor"/>
-                            <connections>
-                                <action selector="addButtonPressed:" destination="NG2-nR-POG" id="vmc-Ld-il2"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="935-Ee-jey">
+                                <color key="tintColor" systemColor="systemBlueColor"/>
+                                <connections>
+                                    <action selector="addButtonPressed:" destination="NG2-nR-POG" id="vmc-Ld-il2"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Del/Add" id="BXI-kv-G0u">
+                                <connections>
+                                    <action selector="delAddButtonPressed:" destination="NG2-nR-POG" id="uvn-U4-mHA"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addButton" destination="935-Ee-jey" id="MEn-rW-ZUs"/>
+                        <outlet property="delAddButton" destination="BXI-kv-G0u" id="NSf-A1-VUS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVy-48-63M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

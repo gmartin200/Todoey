@@ -14,7 +14,8 @@
 		8205724E298EFF5200F23AB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8205724C298EFF5200F23AB3 /* Main.storyboard */; };
 		82057250298EFF5600F23AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8205724F298EFF5600F23AB3 /* Assets.xcassets */; };
 		82057253298EFF5600F23AB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82057251298EFF5600F23AB3 /* LaunchScreen.storyboard */; };
-		820D52ED29CA2D8B005A4817 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 820D52EB29CA2D8B005A4817 /* DataModel.xcdatamodeld */; };
+		823B061929E0827200D5D442 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B061829E0827200D5D442 /* Item.swift */; };
+		823B061B29E0827F00D5D442 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B061A29E0827F00D5D442 /* Category.swift */; };
 		82FFE30F29D363FF00B87CDA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE30E29D363FF00B87CDA /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +31,8 @@
 		8205724F298EFF5600F23AB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82057252298EFF5600F23AB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82057254298EFF5600F23AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		820D52EC29CA2D8B005A4817 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		823B061829E0827200D5D442 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		823B061A29E0827F00D5D442 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		82FFE30E29D363FF00B87CDA /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,7 +83,8 @@
 		82CAC803299D797600F5C594 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				820D52EB29CA2D8B005A4817 /* DataModel.xcdatamodeld */,
+				823B061A29E0827F00D5D442 /* Category.swift */,
+				823B061829E0827200D5D442 /* Item.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -126,7 +129,6 @@
 				14844ECD569C248A1E09C923 /* Pods-Todoey.debug.xcconfig */,
 				45619440C1679374C514AF0D /* Pods-Todoey.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -246,10 +248,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				82FFE30F29D363FF00B87CDA /* CategoryViewController.swift in Sources */,
-				820D52ED29CA2D8B005A4817 /* DataModel.xcdatamodeld in Sources */,
 				8205724B298EFF5200F23AB3 /* TodoListViewController.swift in Sources */,
 				82057247298EFF5200F23AB3 /* AppDelegate.swift in Sources */,
+				823B061929E0827200D5D442 /* Item.swift in Sources */,
 				82057249298EFF5200F23AB3 /* SceneDelegate.swift in Sources */,
+				823B061B29E0827F00D5D442 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,19 +472,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		820D52EB29CA2D8B005A4817 /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				820D52EC29CA2D8B005A4817 /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 820D52EC29CA2D8B005A4817 /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8205723B298EFF5200F23AB3 /* Project object */;
 }

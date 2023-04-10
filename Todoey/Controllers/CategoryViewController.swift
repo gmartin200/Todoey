@@ -6,34 +6,31 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class CategoryViewController: UITableViewController {
-    var categories = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
+    var categories : Results<Category>?
     var deleteState = false
     @IBOutlet weak var delAddButton: UIBarButtonItem!
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(dataFilePath)
-//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-//        print("\(deleteState)")
         deleteState = false
-        delAddButton.title = "Add Categories"
-        addButton.isHidden = false
+        delAddButton.title = "Add"
+        addButton.isEnabled = true
         loadCategories()
     }
     
     //MARK: - TableView Datasource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = categories[indexPath.row].name
+        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Cetegories Added Yet"
         return cell
     }
     
@@ -42,37 +39,44 @@ class CategoryViewController: UITableViewController {
         if deleteState == false {
             performSegue(withIdentifier: "goToItems", sender: self)
         } else {
-            context.delete(categories[indexPath.row])
-            categories.remove(at: indexPath.row)
-            saveCategories()
+            if let category = categories?[indexPath.row] {
+                do {
+                    try realm.write() {
+                        realm.delete(category)
+                    }
+                } catch {
+                    print("Error deleting category \(error)")
+                }
+            }
+            tableView.reloadData()
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
+    //MARK: Seque
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! TodoListViewController
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categories[indexPath.row]
+            destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
     
     //MARK: - Data Manipulation Methods
-    func saveCategories() {
+    func save(category : Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         } catch {
             print("Error saving category, \(error)")
         }
         tableView.reloadData()
     }
     
-    func loadCategories(with request : NSFetchRequest<Category> = Category.fetchRequest()) {
-        do {
-            categories = try context.fetch(request)
-        } catch {
-            print("Error loading categories \(error)")
-        }
+    func loadCategories() {
+        categories = realm.objects(Category.self)
         tableView.reloadData()
+
     }
     
     //MARK: - Add New Categories
@@ -83,16 +87,9 @@ class CategoryViewController: UITableViewController {
             let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
             let action = UIAlertAction(title: "Add", style: .default) { action in
                 //This is what happens once the user clicks the Add Category button on our UIAlert
-                let newCategory = Category(context: self.context)
+                let newCategory = Category()
                 newCategory.name = textField.text!
-                self.categories.append(newCategory)
-//                do {
-//                    try self.categories.sort(by: <#T##(Category, Category) throws -> Bool#>)
-//                } catch {
-//                    print("Error sorting: \(error)")
-//                }
-//                categories.sort(using: Category)
-                self.saveCategories()
+                self.save(category : newCategory)
             }
             
             alert.addTextField { field in
@@ -105,16 +102,16 @@ class CategoryViewController: UITableViewController {
             present(alert, animated: true, completion: nil)
         }
     }
-    //MARK: - Toggle between Adding and Deleting Categories
     
+    //MARK: - Toggle between Adding and Deleting Categories
     @IBAction func deleteAddToggleButtonPressed(_ sender: UIBarButtonItem) {
         deleteState = !deleteState
         if deleteState {
-            delAddButton.title = "Del Categories"
-            addButton.isHidden = true
+            delAddButton.title = "Del"
+            addButton.isEnabled = false
         } else {
-            delAddButton.title = "Add Categories"
-            addButton.isHidden = false
+            delAddButton.title = "Add"
+            addButton.isEnabled = true
         }
     }
 }
