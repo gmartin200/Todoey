@@ -16,6 +16,7 @@
 		82057253298EFF5600F23AB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82057251298EFF5600F23AB3 /* LaunchScreen.storyboard */; };
 		823B061929E0827200D5D442 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B061829E0827200D5D442 /* Item.swift */; };
 		823B061B29E0827F00D5D442 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823B061A29E0827F00D5D442 /* Category.swift */; };
+		82EA567A29EADB2300D4A7E8 /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82EA567929EADB2300D4A7E8 /* SwipeTableViewController.swift */; };
 		82FFE30F29D363FF00B87CDA /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FFE30E29D363FF00B87CDA /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		82057254298EFF5600F23AB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823B061829E0827200D5D442 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		823B061A29E0827F00D5D442 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		82EA567929EADB2300D4A7E8 /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		82FFE30E29D363FF00B87CDA /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 			children = (
 				82FFE30E29D363FF00B87CDA /* CategoryViewController.swift */,
 				8205724A298EFF5200F23AB3 /* TodoListViewController.swift */,
+				82EA567929EADB2300D4A7E8 /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				82FFE30F29D363FF00B87CDA /* CategoryViewController.swift in Sources */,
 				8205724B298EFF5200F23AB3 /* TodoListViewController.swift in Sources */,
 				82057247298EFF5200F23AB3 /* AppDelegate.swift in Sources */,
+				82EA567A29EADB2300D4A7E8 /* SwipeTableViewController.swift in Sources */,
 				823B061929E0827200D5D442 /* Item.swift in Sources */,
 				82057249298EFF5200F23AB3 /* SceneDelegate.swift in Sources */,
 				823B061B29E0827F00D5D442 /* Category.swift in Sources */,

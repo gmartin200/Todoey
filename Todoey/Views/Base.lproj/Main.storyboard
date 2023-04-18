@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="Z9r-aF-XsQ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Z9r-aF-XsQ" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Z9r-aF-XsQ" id="mDS-8G-fzg">
@@ -33,23 +33,15 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Todoey" id="MZT-ar-hGs">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="jRP-Lz-yMs">
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="lNL-db-kCa" id="wWw-Ov-xvs"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem tag="1" title="Del/Add" id="K6Y-pZ-xjn">
-                                <connections>
-                                    <action selector="deleteAddToggleButtonPressed:" destination="lNL-db-kCa" id="oH7-SP-2LR"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jRP-Lz-yMs">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="lNL-db-kCa" id="wWw-Ov-xvs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addButton" destination="jRP-Lz-yMs" id="wFp-q6-r3b"/>
-                        <outlet property="delAddButton" destination="K6Y-pZ-xjn" id="YIo-RJ-ldT"/>
                         <segue destination="NG2-nR-POG" kind="show" identifier="goToItems" id="uGJ-gm-1P2"/>
                     </connections>
                 </tableViewController>
@@ -74,7 +66,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoItemCell" id="qT5-SB-2Is">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="qT5-SB-2Is" customClass="SwipeTableViewCell" customModule="SwipeCellKit">
                                 <rect key="frame" x="0.0" y="94" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qT5-SB-2Is" id="RAV-F5-RHc">
@@ -89,23 +81,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="bg2-Go-XK3">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="935-Ee-jey">
-                                <color key="tintColor" systemColor="systemBlueColor"/>
-                                <connections>
-                                    <action selector="addButtonPressed:" destination="NG2-nR-POG" id="vmc-Ld-il2"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Del/Add" id="BXI-kv-G0u">
-                                <connections>
-                                    <action selector="delAddButtonPressed:" destination="NG2-nR-POG" id="uvn-U4-mHA"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="935-Ee-jey">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="NG2-nR-POG" id="vmc-Ld-il2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="935-Ee-jey" id="MEn-rW-ZUs"/>
-                        <outlet property="delAddButton" destination="BXI-kv-G0u" id="NSf-A1-VUS"/>
+                        <outlet property="searchBar" destination="dEj-RP-Xrc" id="iNc-OZ-vJg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVy-48-63M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -117,10 +101,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="E6j-aP-xcc" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V1U-aa-y3B">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="V1U-aa-y3B">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" systemColor="systemBlueColor"/>
+                        <color key="barTintColor" systemColor="systemCyanColor"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" systemColor="systemBlueColor"/>
                         </textAttributes>
@@ -141,6 +125,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemCyanColor">
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

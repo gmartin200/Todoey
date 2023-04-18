@@ -7,20 +7,18 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController {
     let realm = try! Realm()
     var categories : Results<Category>?
-    var deleteState = false
-    @IBOutlet weak var delAddButton: UIBarButtonItem!
+
     @IBOutlet weak var addButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        deleteState = false
-        delAddButton.title = "Add"
-        addButton.isEnabled = true
         loadCategories()
+        tableView.separatorStyle = .none
     }
     
     //MARK: - TableView Datasource Methods
@@ -29,28 +27,19 @@ class CategoryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "No Cetegories Added Yet"
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if let category = categories?[indexPath.row] {
+            cell.textLabel?.text = category.name
+            guard let categoryColor = UIColor(hexString: category.color) else {fatalError()}
+            cell.backgroundColor = categoryColor
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+        }
         return cell
     }
     
     //MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if deleteState == false {
-            performSegue(withIdentifier: "goToItems", sender: self)
-        } else {
-            if let category = categories?[indexPath.row] {
-                do {
-                    try realm.write() {
-                        realm.delete(category)
-                    }
-                } catch {
-                    print("Error deleting category \(error)")
-                }
-            }
-            tableView.reloadData()
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        performSegue(withIdentifier: "goToItems", sender: self)
     }
     
     //MARK: Seque
@@ -79,39 +68,39 @@ class CategoryViewController: UITableViewController {
 
     }
     
-    //MARK: - Add New Categories
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        // this is called when the "+" button is pressed
-        if deleteState == false {
-            var textField = UITextField()
-            let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Add", style: .default) { action in
-                //This is what happens once the user clicks the Add Category button on our UIAlert
-                let newCategory = Category()
-                newCategory.name = textField.text!
-                self.save(category : newCategory)
+    //MARK: - Delete Data From Swipe
+    override func updateModel(at indexPath: IndexPath) {
+        if let category = self.categories?[indexPath.row] {
+            do {
+                try self.realm.write() {
+                    self.realm.delete(category)
+                }
+            } catch {
+                print("Error deleting category \(error)")
             }
-            
-            alert.addTextField { field in
-                textField.placeholder = "Add a new category"
-                textField = field
-            }
-            
-            alert.addAction(action)
-            
-            present(alert, animated: true, completion: nil)
         }
     }
     
-    //MARK: - Toggle between Adding and Deleting Categories
-    @IBAction func deleteAddToggleButtonPressed(_ sender: UIBarButtonItem) {
-        deleteState = !deleteState
-        if deleteState {
-            delAddButton.title = "Del"
-            addButton.isEnabled = false
-        } else {
-            delAddButton.title = "Add"
-            addButton.isEnabled = true
+    //MARK: - Add New Categories
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        // this is called when the "+" button is pressed
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+            //This is what happens once the user clicks the Add Category button on our UIAlert
+            let newCategory = Category()
+            newCategory.name = textField.text!
+            newCategory.color = UIColor.randomFlat().hexValue()
+            self.save(category : newCategory)
         }
+        
+        alert.addTextField { field in
+            textField.placeholder = "Add a new category"
+            textField = field
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
     }
 }
